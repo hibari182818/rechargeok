@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge-OK - Oklahoma Electric School Bus V2G Project</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f0ebdb; /* Soft earth tone */
+            color: #333; /* Dark text color for contrast */
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 250px;
+            background-color: #e5d8c9; /* Light beige */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+        }
+
+        nav img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #a5796b; /* Earthy brown */
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+
+        nav a:hover {
+            color: #c19382; /* Slightly darker earth tone for hover */
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 270px; /* Adjusted for sidebar */
+            padding: 20px;
+            max-width: calc(100% - 270px);
+        }
+
+        .banner {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            padding: 100px 20px;
+            background-image: url('bc21f074-2fff-4513-9cd9-7d0030adafcf.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner h2, .banner p {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background to improve text readability */
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay to enhance contrast */
+            z-index: 1;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background-color: #faecd5; /* Soft cream color */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #a5796b; /* Earthy brown */
+        }
+
+        h3 {
+            color: #d4ab88; /* Medium beige */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #c4967b; /* Rich brown */
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a5796b; /* Slightly darker for hover effect */
+        }
+
+        /* Form Styles */
+        form label,
+        form input,
+        form textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0ebdb; /* Light earth tone */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e2bba6;
+        }
+
+        td {
+            background-color: #f9f1e7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <nav>
+        <img src="0E65072E-B9EE-4F71-9167-FF06FC969FDC.png" alt="Recharge-OK Logo">
+        <ul>
+            <li><a href="#about">About the Project</a></li>
+            <li><a href="#research">Research & Approach</a></li>
+            <li><a href="#partnership">Partnerships & Community Engagement</a></li>
+            <li><a href="#stages">Project Stages</a></li>
+            <li><a href="#impact">Impact & Outcomes</a></li>
+            <li><a href="game.html">EV School Bus Adventure</a></li>
+            <li><a href="#feedback">Community Feedback</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Project Overview -->
+        <section id="about">
+            <div class="banner">
+                <div class="banner-overlay"></div>
+                <h2>RECHARGE-OK: Revitalizing Oklahoma with Electric Energy</h2>
+                <p>Recharge-OK is an innovative project designed to enhance Oklahoma's energy resilience through the integration of Electric School Buses (ESB) with Vehicle-to-Grid (V2G) technology, promoting sustainable energy use.</p>
+            </div>
+        </section>
+
+        <!-- Research and Approach -->
+        <section id="research">
+            <h2>Technology Explanation</h2>
+            <h3>What is V2G Technology?</h3>
+            <p>Vehicle-to-Grid (V2G) technology allows electric vehicles to return power to the grid, providing backup power and enhancing grid stability. This makes electric school buses perfect candidates for pilot V2G initiatives due to their predictable schedules and large battery capacity.</p>
+            <p>In addition, V2G technology works by connecting the vehicle's battery to the grid when it is not in use, allowing for energy to be drawn or provided based on the grid's needs. The ability to use stored energy from multiple vehicles can reduce the reliance on traditional power plants, especially during peak demand times, and stabilize the overall power system. Electric school buses, with their consistent schedules, are an ideal platform for this pilot because they provide a reliable energy storage solution when not transporting students.</p>
+        </section>
+
+        <!-- Partnerships and Community Engagement -->
+        <section id="partnership">
+            <h2>Partnerships & Community Engagement</h2>
+            <h3>Civic Partnerships</h3>
+            <p>We collaborate with multiple community partners to make this project a success:</p>
+            <ul>
+                <li><strong>OUHSC (University of Oklahoma Health Sciences Center)</strong>: Provides health impact assessment and public health support for the community.</li>
+                <li><strong>OG&E (Oklahoma Gas & Electric)</strong>: Supplies expertise in energy management and grid integration for the successful implementation of V2G technology.</li>
+                <li><strong>Shawnee Public Schools</strong>: Participates in pilot testing by providing electric school buses for the project, ensuring real-world testing and community involvement.</li>
+                <li><strong>City of Oklahoma City</strong>: Supports regulatory compliance and policy alignment to help facilitate the integration of electric school buses into the city’s public transportation system.</li>
+            </ul>
+        </section>
+
+        <!-- Project Stages -->
+        <section id="stages">
+            <h2>Project Stages</h2>
+            <p>The project is divided into multiple stages to ensure efficient implementation:</p>
+            <ul>
+                <li><strong>Stage 1:</strong> Community and partnership building, kick-off events, and defining research questions.</li>
+                <li><strong>Stage 2:</strong> Proposal writing, pilot implementation, and scalability evaluation.</li>
+<h3>Timeline</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Summary</th>
+                </tr>
+                <tr>
+                    <td>10/2/24</td>
+                    <td>10:00-13:00</td>
+                    <td>OKC Campus</td>
+                    <td>Kick-off</td>
+                </tr>
+                <tr>
+                    <td>11/6/24</td>
+                    <td>10:00-13:00</td>
+                    <td>Shawnee</td>
+                    <td>Workshop and Group Discussions</td>
+                </tr>
+                <tr>
+                    <td>12/11/24</td>
+                    <td>10:30-12:00</td>
+                    <td>Zoom</td>
+                    <td>Reflection and Group Discussion</td>
+                </tr>
+                <tr>
+                    <td>1/22/25</td>
+                    <td>10:00-16:00</td>
+                    <td>Off Campus in OKC</td>
+                    <td>Stage 2 Proposal Writing Retreat</td>
+                </tr>
+                <tr>
+                    <td>February 2025</td>
+                    <td>TBD</td>
+                    <td>Zoom</td>
+                    <td>Online co-working | Proposal</td>
+                </tr>
+                <tr>
+                    <td>3/12/25</td>
+                    <td>TBD</td>
+                    <td>Off-campus</td>
+                    <td>Team Building and Celebration</td>
+                </tr>
+            </table>
+        </section>
+            </ul>
+        </section>
+
+        <!-- Impact & Outcomes -->
+        <section id="impact">
+            <h2>Impact & Outcomes</h2>
+            <h3>Technological and Social Impact</h3>
+            <p>Our project aims to enhance grid resilience, reduce greenhouse gas emissions, and engage local communities through active participation.</p>
+            <p>By integrating V2G technology into school buses, the project provides a cleaner, more efficient energy solution. It also contributes to the reliability and stability of the grid by using stored energy to meet peak demands. Furthermore, this project fosters educational opportunities for students and community members to learn about sustainability and renewable energy.</p>
+        </section>
+
+        <!-- Community Feedback Form -->
+        <section id="feedback">
+            <h2>Community Feedback</h2>
+            <p>If you have any questions or suggestions, please submit them below:</p>
+            <form action="mailto:recharge-ok@ou.edu" method="post" enctype="text/plain">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>For more information about the Recharge-OK project, please contact us at:</p>
+            <p>Email: <a href="mailto:recharge-ok@ou.edu">recharge-ok@ou.edu</a></p>
+        </section>
+    </main>
+</body>
+
+</html>

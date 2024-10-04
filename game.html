@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV School Bus Adventure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #e6f7ff;
+            height: 100vh;
+        }
+
+        #game-container {
+            display: none;
+            position: relative;
+            width: 90vw;
+            height: 60vh;
+            max-width: 1200px;
+            max-height: 800px;
+            border: 2px solid #4caf50;
+            background: #cfe8fc;
+            overflow: hidden;
+        }
+
+        #ev-bus {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 150px;
+            height: auto;
+        }
+
+        .student, .pedestrian, .water-puddle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+
+        .student {
+            background-size: contain;
+        }
+
+        .pedestrian {
+            background: url('passbyman.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        .water-puddle {
+            background: url('water.png') no-repeat center center;
+            background-size: contain;
+        }
+
+        #info-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        #battery-status {
+            display: flex;
+            align-items: center;
+        }
+
+        #battery-bar {
+            width: 100px;
+            height: 20px;
+            background-color: #ddd;
+            border: 1px solid #333;
+            border-radius: 5px;
+            margin-left: 5px;
+            position: relative;
+        }
+
+        #battery-level {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: #4caf50;
+        }
+
+        #score {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #timer {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #start-screen {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #ev-bus {
+                width: 120px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="start-screen">
+        <h1>Welcome to EV School Bus Adventure</h1>
+        <p>Use the arrow keys to move up, down, left, and right to pick up children, avoid dog-walking pedestrians and water puddles, and remember to recharge!</p>
+        <button id="start-button">Start Game</button>
+    </div>
+
+    <div id="game-container">
+        <!-- Information Panel -->
+        <div id="info-panel">
+            <div id="battery-status">
+                Battery Level:
+                <div id="battery-bar">
+                    <div id="battery-level"></div>
+                </div>
+            </div>
+            <div id="score">Score: 0</div>
+            <div id="timer">Time: 60 seconds</div>
+            <button id="charge-button">Charge</button>
+        </div>
+
+        <!-- EV Bus -->
+        <img id="ev-bus" src="school_bus_america.png" alt="School Bus">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial settings
+            let busPositionX = 20;
+            let busPositionY = 20;
+            let batteryLevel = 100;
+            let score = 0;
+            let timeLeft = 60; // 1 minute countdown
+            let gameInterval;
+            let timerInterval;
+
+            const evBus = document.getElementById('ev-bus');
+            const batteryBar = document.getElementById('battery-level');
+            const scoreDisplay = document.getElementById('score');
+            const timerDisplay = document.getElementById('timer');
+            const gameContainer = document.getElementById('game-container');
+            const startScreen = document.getElementById('start-screen');
+            const startButton = document.getElementById('start-button');
+            const chargeButton = document.getElementById('charge-button');
+
+            // Start Game function
+            startButton.addEventListener('click', startGame);
+            chargeButton.addEventListener('click', chargeBus);
+
+            function startGame() {
+                startScreen.style.display = 'none';
+                gameContainer.style.display = 'block';
+                updateBatteryLevel();
+                gameInterval = setInterval(generateStudent, 3000);
+                setInterval(generateWaterPuddle, 8000);
+                setInterval(generatePedestrian, 10000);
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+
+            // Update Battery Level display
+            function updateBatteryLevel() {
+                batteryBar.style.width = batteryLevel + '%';
+                batteryBar.style.backgroundColor = batteryLevel > 20 ? '#4caf50' : '#ff4444';
+            }
+
+            // Update Score display
+            function updateScore(points) {
+                score += points;
+                scoreDisplay.textContent = 'Score: ' + score;
+            }
+
+            // Update Timer display
+            function updateTimer() {
+                timeLeft -= 1;
+                timerDisplay.textContent = 'Time: ' + timeLeft + ' seconds';
+
+                if (timeLeft <= 0) {
+                    clearInterval(gameInterval);
+                    clearInterval(timerInterval);
+                    alert("Time's up! Game over! Your final score is: " + score);
+                    resetGame();
+                }
+            }
+
+            // Reset Game function
+            function resetGame() {
+                busPositionX = 20;
+                busPositionY = 20;
+                batteryLevel = 100;
+                score = 0;
+                timeLeft = 60;
+                evBus.style.left = busPositionX + 'px';
+                evBus.style.top = busPositionY + 'px';
+                updateBatteryLevel();
+                scoreDisplay.textContent = 'Score: ' + score;
+                timerDisplay.textContent = 'Time: 60 seconds';
+
+                // Remove all dynamic elements (students, water puddles, pedestrians)
+                const dynamicElements = document.querySelectorAll('.student, .water-puddle, .pedestrian');
+                dynamicElements.forEach(element => element.remove());
+
+                // Show start screen again
+                gameContainer.style.display = 'none';
+                startScreen.style.display = 'block';
+            }
+
+            // Simulate Battery Consumption
+            function consumeBattery() {
+                if (batteryLevel > 0) {
+                    batteryLevel -= 1;
+                    updateBatteryLevel();
+                } else {
+                    alert("Battery is empty! Please charge!");
+                }
+            }
+
+            // Move the bus
+            function moveBus(direction) {
+                if (batteryLevel > 0) {
+                    if (direction === 'right' && busPositionX + 120 < gameContainer.offsetWidth) {
+                        busPositionX += 10;
+                    } else if (direction === 'left' && busPositionX > 10) {
+                        busPositionX -= 10;
+                    } else if (direction === 'up' && busPositionY > 10) {
+                        busPositionY -= 10;
+                    } else if (direction === 'down' && busPositionY + 70 < gameContainer.offsetHeight) {
+                        busPositionY += 10;
+                    }
+                    evBus.style.left = busPositionX + 'px';
+                    evBus.style.top = busPositionY + 'px';
+                    consumeBattery();
+                    checkPickup();
+                    checkCollision();
+                }
+            }
+
+            // Charge Bus function
+            function chargeBus() {
+                batteryLevel = 100;
+                updateBatteryLevel();
+            }
+
+            // Handle keyboard controls to move the bus
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowRight') {
+                    moveBus('right');
+                } else if (event.key === 'ArrowLeft') {
+                    moveBus('left');
+                } else if (event.key === 'ArrowUp') {
+                    moveBus('up');
+                } else if (event.key === 'ArrowDown') {
+                    moveBus('down');
+                }
+            });
+
+            // Check if the bus has picked up a student
+            function checkPickup() {
+                const students = document.getElementsByClassName('student');
+                for (let i = 0; i < students.length; i++) {
+                    const student = students[i];
+                    const studentRect = student.getBoundingClientRect();
+                    const busRect = evBus.getBoundingClientRect();
+
+                    if (
+                        studentRect.left < busRect.right &&
+                        studentRect.right > busRect.left &&
+                        studentRect.top < busRect.bottom &&
+                        studentRect.bottom > busRect.top
+                    ) {
+                        student.remove();
+                        updateScore(10);
+                    }
+                }
+            }
+
+            // Check if the bus has collided with obstacles, water puddles, or pedestrians
+            function checkCollision() {
+                const obstacles = document.getElementsByClassName('water-puddle');
+                const pedestrians = document.getElementsByClassName('pedestrian');
+                const busRect = evBus.getBoundingClientRect();
+
+                // Check collision with water puddles (score deduction without prompt)
+                for (let i = 0; i < obstacles.length; i++) {
+                    const puddle = obstacles[i];
+                    const puddleRect = puddle.getBoundingClientRect();
+
+                    if (
+                        puddleRect.left < busRect.right &&
+                        puddleRect.right > busRect.left &&
+                        puddleRect.top < busRect.bottom &&
+                        puddleRect.bottom > busRect.top
+                    ) {
+                        if (!puddle.classList.contains('hit')) {
+                            updateScore(-5);
+                            puddle.classList.add('hit'); // Mark this puddle as hit to avoid further score deduction
+                        }
+                    }
+                }
+
+                // Check collision with pedestrians
+                for (let i = 0; i < pedestrians.length; i++) {
+                    const pedestrian = pedestrians[i];
+                    const pedestrianRect = pedestrian.getBoundingClientRect();
+
+                    if (
+                        pedestrianRect.left < busRect.right &&
+                        pedestrianRect.right > busRect.left &&
+                        pedestrianRect.top < busRect.bottom &&
+                        pedestrianRect.bottom > busRect.top
+                    ) {
+                        if (!pedestrian.classList.contains('hit')) {
+                            updateScore(-20);
+                            alert("You hit a pedestrian! -20 points!");
+                            pedestrian.classList.add('hit'); // Mark this pedestrian as hit to avoid further score deduction
+                        }
+                    }
+                }
+            }
+
+            // Generate a new student
+            function generateStudent() {
+                const student = document.createElement('div');
+                student.className = 'student';
+
+                // Alternate between two images (kid1 and kid2)
+                const studentImage = Math.random() > 0.5 ? 'kid1.png' : 'kid2.png';
+                student.style.background = `url('${studentImage}') no-repeat center center`;
+                student.style.backgroundSize = 'contain';
+
+                student.style.top = Math.random() * (gameContainer.offsetHeight - 50) + 'px';
+                student.style.left = Math.random() * (gameContainer.offsetWidth - 50) + 'px';
+                gameContainer.appendChild(student);
+
+                // Student will disappear after 5 seconds if not picked up
+                setTimeout(() => {
+                    if (student.parentElement) {
+                        student.remove();
+                        updateScore(-5);
+                    }
+                }, 5000);
+            }
+
+            // Generate a new water puddle
+            function generateWaterPuddle() {
+                const puddle = document.createElement('div');
+                puddle.className = 'water-puddle';
+                puddle.style.top = Math.random() * (gameContainer.offsetHeight - 50) + 'px';
+                puddle.style.left = Math.random() * (gameContainer.offsetWidth - 50) + 'px';
+                gameContainer.appendChild(puddle);
+
+                // Water puddle will disappear after 10 seconds
+                setTimeout(() => {
+                    if (puddle.parentElement) {
+                        puddle.remove();
+                    }
+                }, 10000);
+            }
+
+            // Generate a new pedestrian
+            function generatePedestrian() {
+                const pedestrian = document.createElement('div');
+                pedestrian.className = 'pedestrian';
+                pedestrian.style.top = Math.random() * (gameContainer.offsetHeight - 50) + 'px';
+                pedestrian.style.left = Math.random() * (gameContainer.offsetWidth - 50) + 'px';
+                gameContainer.appendChild(pedestrian);
+
+                // Randomly move the pedestrian every 2 seconds
+                function movePedestrian() {
+                    pedestrian.style.top = Math.random() * (gameContainer.offsetHeight - 50) + 'px';
+                    pedestrian.style.left = Math.random() * (gameContainer.offsetWidth - 50) + 'px';
+                }
+
+                const pedestrianInterval = setInterval(movePedestrian, 2000);
+
+                // Pedestrian will disappear after 15 seconds
+                setTimeout(() => {
+                    clearInterval(pedestrianInterval);
+                    if (pedestrian.parentElement) {
+                        pedestrian.remove();
+                    }
+                }, 15000);
+            }
+        });
+    </script>
+</body>
+
+</html>
+
