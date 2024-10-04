@@ -18,26 +18,30 @@
 
         /* Sidebar Navigation */
         nav {
-            width: 250px;
+            width: 100%;
             background-color: #e5d8c9; /* Light beige */
-            padding: 20px;
+            padding: 10px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-            height: 100vh;
-            position: fixed;
+            height: auto;
+            position: relative;
         }
 
         nav img {
-            width: 100%;
-            margin-bottom: 20px;
+            width: 150px; /* Scaled down for mobile view */
+            margin: 0 auto;
+            display: block;
         }
 
         nav ul {
             list-style: none;
             padding: 0;
+            display: flex;
+            flex-wrap: wrap; /* Wrap items for smaller screens */
+            justify-content: space-around;
         }
 
         nav ul li {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         nav a {
@@ -53,16 +57,16 @@
 
         /* Main Content */
         main {
-            margin-left: 270px; /* Adjusted for sidebar */
+            margin: 0;
             padding: 20px;
-            max-width: calc(100% - 270px);
+            width: 100%;
         }
 
         .banner {
             position: relative;
             text-align: center;
             color: #fff;
-            padding: 100px 20px;
+            padding: 60px 10px;
             background-image: url('bc21f074-2fff-4513-9cd9-7d0030adafcf.webp');
             background-size: cover;
             background-position: center;
@@ -93,7 +97,7 @@
         section {
             margin-bottom: 40px;
             background-color: #faecd5; /* Soft cream color */
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -115,6 +119,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s;
+            width: 100%; /* Full width for mobile view */
         }
 
         button:hover {
@@ -127,7 +132,7 @@
         form textarea {
             display: block;
             width: 100%;
-            margin: 10px 0;
+            margin: 5px 0;
         }
 
         form input,
@@ -142,6 +147,8 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            display: block;
+            overflow-x: auto; /* Scrollable for small screens */
         }
 
         table, th, td {
@@ -156,6 +163,28 @@
 
         td {
             background-color: #f9f1e7;
+            white-space: nowrap; /* Prevent overflow in small screens */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                position: static; /* Set sidebar to static position */
+                height: auto;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center; /* Center the navigation links */
+            }
+
+            .banner {
+                padding: 60px 10px; /* Adjust padding for smaller screens */
+            }
+
+            button {
+                font-size: 14px; /* Reduce button font size */
+            }
         }
     </style>
 </head>
@@ -205,116 +234,6 @@
                 <li><strong>Shawnee Public Schools</strong>: Participates in pilot testing by providing electric school buses for the project, ensuring real-world testing and community involvement.</li>
                 <li><strong>City of Oklahoma City</strong>: Supports regulatory compliance and policy alignment to help facilitate the integration of electric school buses into the city’s public transportation system.</li>
             </ul>
-        </section>
-
-        <!-- Project Stages -->
-        <section id="stages">
-            <h2>Project Stages</h2>
-            <p>The project is divided into multiple stages to ensure efficient implementation:</p>
-            <ul>
-                <li><strong>Stage 1:</strong> Community and partnership building, kick-off events, and defining research questions.</li>
-                <li><strong>Stage 2:</strong> Proposal writing, pilot implementation, and scalability evaluation.</li>
-<h3>Timeline</h3>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Location</th>
-                    <th>Summary</th>
-                </tr>
-                <tr>
-                    <td>10/2/24</td>
-                    <td>10:00-13:00</td>
-                    <td>OKC Campus</td>
-                    <td>Kick-off</td>
-                </tr>
-                <tr>
-                    <td>11/6/24</td>
-                    <td>10:00-13:00</td>
-                    <td>Shawnee</td>
-                    <td>Workshop and Group Discussions</td>
-                </tr>
-                <tr>
-                    <td>12/11/24</td>
-                    <td>10:30-12:00</td>
-                    <td>Zoom</td>
-                    <td>Reflection and Group Discussion</td>
-                </tr>
-                <tr>
-                    <td>1/22/25</td>
-                    <td>10:00-16:00</td>
-                    <td>Off Campus in OKC</td>
-                    <td>Stage 2 Proposal Writing Retreat</td>
-                </tr>
-                <tr>
-                    <td>February 2025</td>
-                    <td>TBD</td>
-                    <td>Zoom</td>
-                    <td>Online co-working | Proposal</td>
-                </tr>
-                <tr>
-                    <td>3/12/25</td>
-                    <td>TBD</td>
-                    <td>Off-campus</td>
-                    <td>Team Building and Celebration</td>
-                </tr>
-            </table>
-        </section>
-            </ul>
-        </section>
-
-        <!-- Impact & Outcomes -->
-        <section id="impact">
-            <h2>Impact & Outcomes</h2>
-            <h3>Technological and Social Impact</h3>
-            <p>Our project aims to enhance grid resilience, reduce greenhouse gas emissions, and engage local communities through active participation.</p>
-            <p>By integrating V2G technology into school buses, the project provides a cleaner, more efficient energy solution. It also contributes to the reliability and stability of the grid by using stored energy to meet peak demands. Furthermore, this project fosters educational opportunities for students and community members to learn about sustainability and renewable energy.</p>
-        </section>
-
-        <!-- Community Feedback Form -->
-        <section id="feedback">
-            <h2>Community Feedback</h2>
-            <p>If you have any questions or suggestions, please submit them below:</p>
- <!-- 引入 EmailJS 脚本 -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
-<script type="text/javascript">
-    (function() {
-        emailjs.init("Pptygy5BODf3PKPEN"); // 替换为您的 User ID
-    })();
-</script>
-
-<!-- 表单部分 -->
-<form id="feedback-form">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
-
-    <button type="submit">Submit</button>
-</form>
-
-<script type="text/javascript">
-    document.getElementById('feedback-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // 阻止表单默认提交行为
-
-        emailjs.sendForm('service_mxnnpbg', 'template_2sy4t0y', this) // 替换为您的 Template ID
-            .then(function() {
-                alert('Your message has been sent successfully!');
-            }, function(error) {
-                alert('Failed to send your message. Please try again.');
-            });
-    });
-</script>
-
-        <!-- Contact Section -->
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>For more information about the Recharge-OK project, please contact us at:</p>
-            <p>Email: <a href="mailto:recharge-ok@ou.edu">recharge-ok@ou.edu</a></p>
         </section>
     </main>
 </body>
