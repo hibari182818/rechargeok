@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge-OK - Oklahoma Electric School Bus V2G Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.2/photoswipe.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.2/umd/photoswipe.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.2/umd/photoswipe-lightbox.umd.min.js"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f0ebdb;
+            color: #333;
+        }
+
+        /* Sidebar Navigation */
+        nav {
+            width: 250px;
+            background-color: #e5d8c9;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        nav img {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
+        }
+
+        nav a {
+            color: #a5796b;
+            text-decoration: none;
+            font-weight: 400;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #c19382;
+            color: #fff;
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 270px;
+            padding: 20px;
+            max-width: calc(100% - 270px);
+        }
+
+        .banner {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            padding: 100px 20px;
+            background-image: url('bc21f074-2fff-4513-9cd9-7d0030adafcf.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner h2, .banner p {
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6);
+            display: inline-block;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+         /* NSF Logo and Award Number */
+        .nsf-info {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .nsf-info img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .nsf-info p {
+            margin: 0;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            background-color: #faecd5;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #a5796b;
+            border-bottom: 2px solid #c19382;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #d4ab88;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            background-color: #c4967b;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a5796b;
+        }
+
+        /* Form Styles */
+        form label,
+        form input,
+        form textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        form input,
+        form textarea {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0ebdb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e2bba6;
+        }
+
+        td {
+            background-color: #f9f1e7;
+        }
+
+        /* Social Media Icons */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            font-size: 24px;
+            color: #c4967b;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #a5796b;
+        }
+
+        /* Timeline Styles */
+        .timeline-event {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .completed {
+            background-color: #e8f6e8;
+            border-left: 4px solid #2ecc71;
+        }
+
+        .current {
+            background-color: #fff5e6;
+            border-left: 4px solid #f39c12;
+            font-weight: bold;
+        }
+
+        .completed a {
+            color: #27ae60;
+            text-decoration: none;
+        }
+
+        .completed a:hover {
+            text-decoration: underline;
+        }
+
+        /* Photo Gallery Styles */
+        .photo-gallery {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .photo-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .photo-gallery img.active {
+            opacity: 1;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .gallery-nav button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar Navigation -->
+    <nav>
+        <img src="0E65072E-B9EE-4F71-9167-FF06FC969FDC.png" alt="Recharge-OK Logo">
+        <ul>
+            <li><a href="#about">About the Project</a></li>
+            <li><a href="#research">Research & Approach</a></li>
+            <li><a href="#partnership">Partnerships & Community Engagement</a></li>
+            <li><a href="#stages">Project Stages</a></li>
+            <li><a href="#impact">Impact & Outcomes</a></li>
+            <li><a href="game.html">EV School Bus Adventure</a></li>
+            <li><a href="#feedback">Community Feedback</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Project Overview -->
+        <section id="about">
+            <div class="banner">
+                <div class="banner-overlay"></div>
+                <h2>RECHARGE-OK: Revitalizing Oklahoma with Electric Energy</h2>
+                <p>Recharge-OK is an innovative project designed to enhance Oklahoma's energy resilience through the integration of Electric School Buses (ESB) with Vehicle-to-Grid (V2G) technology, promoting sustainable energy use.</p>
+                <div class="nsf-info">
+                    <img src="nsf-logo.png" alt="NSF Logo">
+                    <p>NSF Award Number: 2431225</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research and Approach -->
+        <section id="research">
+            <h2>Technology Explanation</h2>
+            <h3>What is V2G Technology?</h3>
+            <p>Vehicle-to-Grid (V2G) technology allows electric vehicles to return power to the grid, providing backup power and enhancing grid stability. This makes electric school buses perfect candidates for pilot V2G initiatives due to their predictable schedules and large battery capacity.</p>
+            <p>V2G technology works by connecting the vehicle's battery to the grid when it is not in use, allowing for energy to be drawn or provided based on the grid's needs. The ability to use stored energy from multiple vehicles can reduce the reliance on traditional power plants, especially during peak demand times, and stabilize the overall power system. Electric school buses, with their consistent schedules, are an ideal platform for this pilot because they provide a reliable energy storage solution when not transporting students.</p>
+        </section>
+
+        <!-- Partnerships and Community Engagement -->
+        <section id="partnership">
+            <h2>Partnerships & Community Engagement</h2>
+            <h3>Civic Partnerships</h3>
+            <p>We collaborate with multiple community partners to make this project a success:</p>
+            <ul>
+                <li><strong>OUHSC (University of Oklahoma Health Sciences Center)</strong>: Provides health impact assessment and public health support for the community.</li>
+                <li><strong>OG&E (Oklahoma Gas & Electric)</strong>: Supplies expertise in energy management and grid integration for the successful implementation of V2G technology.</li>
+                <li><strong>Shawnee Public Schools</strong>: Participates in pilot testing by providing electric school buses for the project, ensuring real-world testing and community involvement.</li>
+                <li><strong>City of Oklahoma City</strong>: Supports regulatory compliance and policy alignment to help facilitate the integration of electric school buses into the city's public transportation system.</li>
+            </ul>
+        </section>
+
+        <!-- Project Stages -->
+        <section id="stages">
+            <h2>Project Stages</h2>
+            <p>The project is divided into multiple stages to ensure efficient implementation:</p>
+            <ul>
+                <li><strong>Stage 1:</strong> Community and partnership building, kick-off events, and defining research questions.</li>
+                <li><strong>Stage 2:</strong> Proposal writing, pilot implementation, and scalability evaluation.</li>
+            </ul>
+            <h3>Timeline</h3>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Summary</th>
+                </tr>
+                <tr class="timeline-event completed">
+                    <td>10/2/24</td>
+                    <td>10:00-13:00</td>
+                    <td>OKC Campus</td>
+                    <td><a href="#kickoff-summary">Kick-off (Completed)</a></td>
+                </tr>
+                <tr class="timeline-event current">
+                    <td>11/6/24</td>
+                    <td>10:00-13:00</td>
+                    <td>Shawnee</td>
+                    <td>Workshop and Group Discussions (Current Event)</td>
+                </tr>
+                <tr>
+                    <td>12/11/24</td>
+                    <td>10:30-12:00</td>
+                    <td>Zoom</td>
+                    <td>Reflection and Group Discussion</td>
+                </tr>
+                <tr>
+                    <td>1/22/25</td>
+                    <td>10:00-16:00</td>
+                    <td>Off Campus in OKC</td>
+                    <td>Stage 2 Proposal Writing Retreat</td>
+                </tr>
+                <tr>
+                    <td>February 2025</td>
+                    <td>TBD</td>
+                    <td>Zoom</td>
+                    <td>Online co-working | Proposal</td>
+                </tr>
+                <tr>
+                    <td>3/12/25</td>
+                    <td>TBD</td>
+                    <td>Off-campus</td>
+                    <td>Team Building and Celebration</td>
+                </tr>
+            </table>
+        </section>
+
+       <!-- Kick-off Summary -->
+       <section id="kickoff-summary">
+    <h2>Kick-off Event Summary</h2>
+    <p>Our kick-off event on 10/2/24 was a great success! We introduced the Recharge-OK project to our partners and the community, outlining our goals and the potential impact of V2G technology on Oklahoma's energy landscape.</p>
+    
+    <div class="pswp-gallery" id="my-gallery">
+        <a href="Recharge-OK Kickoff Photos - 1.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 1.jpg" alt="Kickoff Photo 1" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 2.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 2.jpg" alt="Kickoff Photo 2" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 3.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 3.jpg" alt="Kickoff Photo 3" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 4.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 4.jpg" alt="Kickoff Photo 4" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 5.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 5.jpg" alt="Kickoff Photo 5" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 6.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 6.jpg" alt="Kickoff Photo 6" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 7.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 7.jpg" alt="Kickoff Photo 7" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 9.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 9.jpg" alt="Kickoff Photo 9" />
+        </a>
+        <a href="Recharge-OK Kickoff Photos - 10.jpg" 
+           data-pswp-width="1600" 
+           data-pswp-height="1200" 
+           target="_blank">
+            <img src="Recharge-OK Kickoff Photos - 10.jpg" alt="Kickoff Photo 10" />
+        </a>
+            </div>
+    <p>Key highlights from the event included:</p>
+    <ul>
+        <li>Introduction of project partners and their roles</li>
+        <li>Presentation on V2G technology and its benefits</li>
+        <li>Q&A session with community members</li>
+        <li>Demonstration of an electric school bus</li>
+    </ul>
+</section>
+
+<style>
+    .pswp-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .pswp-gallery a {
+        width: calc(33.33% - 10px);
+        aspect-ratio: 4/3;
+        overflow: hidden;
+    }
+    .pswp-gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .pswp-gallery img:hover {
+        transform: scale(1.05);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var lightbox = new PhotoSwipeLightbox({
+            gallery: '#my-gallery',
+            children: 'a',
+            pswpModule: PhotoSwipe
+        });
+        lightbox.init();
+    });
+</script>
+    </section>
+
+
+        <!-- Impact & Outcomes -->
+        <section id="impact">
+            <h2>Impact & Outcomes</h2>
+            <h3>Technological and Social Impact</h3>
+            <p>Our project aims to enhance grid resilience, reduce greenhouse gas emissions, and engage local communities through active participation.</p>
+            <p>By integrating V2G technology into school buses, the project provides a cleaner, more efficient energy solution. It also contributes to the reliability and stability of the grid by using stored energy to meet peak demands. Furthermore, this project fosters educational opportunities for students and community members to learn about sustainability and renewable energy.</p>
+        </section>
+
+        <!-- Community Feedback Form -->
+        <section id="feedback">
+            <h2>Community Feedback</h2>
+            <p>If you have any questions or suggestions, please submit them below:</p>
+            <form id="feedback-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>For more information about the Recharge-OK project, please contact us at:</p>
+            <p>Email: <a href="mailto:recharge-ok@ou.edu">recharge-ok@ou.edu</a></p>
+            <div class="social-media">
+                <a href="https://www.facebook.com/profile.php?id=61566502827230" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/rechargeok777/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentPhotoIndex = 0;
+        const photos = document.querySelectorAll('.photo-gallery img');
+
+        function changePhoto(direction) {
+            photos[currentPhotoIndex].classList.remove('active');
+            currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+            photos[currentPhotoIndex].classList.add('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target == lightbox) {
+                lightbox.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
